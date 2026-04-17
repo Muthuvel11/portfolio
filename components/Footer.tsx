@@ -10,7 +10,7 @@ export default function Footer() {
       category: "engagement",
       label: "Footer Resume",
     });
-    window.open("/Muthuvel_FullStackDeveloper.pdf", "_blank");
+    window.open("/Muthuvel_M.pdf", "_blank");
   };
 
   return (
@@ -19,11 +19,11 @@ export default function Footer() {
         <div className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
         </div>
-        
+
         <div className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
           <a href={`mailto:${personalInfo.email}`} className="hover:text-primary transition-colors">Email</a>
           <a href={`https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">LinkedIn</a>
-          <button 
+          <button
             onClick={trackResumeDownload}
             className="hover:text-primary transition-colors cursor-pointer"
           >

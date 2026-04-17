@@ -1,26 +1,26 @@
 export const projects = [
   {
-    title: "Bank Reconciliation Statement (BRS)",
-    description: "End-to-end module ensuring accurate bank reconciliations with automated matching and audit logs.",
-    tech: ["Angular", "NestJS", "MariaDB"],
-    highlights: ["Automated matching", "Real-time reconciliation", "Audit trails"],
+    title: "AI-Powered PDF Data Extractor",
+    description: "Built a system to extract structured data from PDFs using AI-based processing. Implemented logic to detect text-based vs scanned PDFs with fallback handling.",
+    tech: ["AI API", "Node.js", "Process Automation"],
+    highlights: ["Optical Character Recognition", "AI Data Structuring", "Fallback Handling"],
   },
   {
-    title: "Vendor Onboarding Module",
-    description: "Streamlined vendor management system with automated verification and lifecycle tracking.",
-    tech: ["Angular", "Node.js", "MySQL"],
-    highlights: ["Document verification", "Workflow automation"],
+    title: "Admin Panel & Website",
+    description: "Developed a full-stack admin dashboard with authentication and CRUD operations. Integrated Supabase for database and storage management.",
+    tech: ["Next.js", "Supabase", "Cloudinary"],
+    highlights: ["Image Optimization", "Role-based Access", "Real-time Database"],
   },
   {
-    title: "Fixed Asset Lifecycle Management",
-    description: "Complete asset tracking system from procurement to disposal, including depreciation calculations.",
+    title: "Bank Reconciliation System",
+    description: "Developed financial reconciliation module with transaction matching and reporting. Improved backend performance using optimized SQL queries.",
     tech: ["Angular", "NestJS", "MySQL"],
-    highlights: ["Lifecycle tracking", "Depreciation engine"],
+    highlights: ["Transaction Matching", "Performance Tuning", "Financial Reporting"],
   },
   {
-    title: "Chit Transfer & Termination",
-    description: "Specialized financial modules for chit fund management, handling complex transfers and terminations.",
-    tech: ["Angular", "NestJS", "MariaDB"],
-    highlights: ["Complex financial logic", "UI/UX design"],
+    title: "Birthday Wishes Notification System",
+    description: "Built an automated birthday wishes system using PHP and Google Apps Script to trigger scheduled email/notification delivery.",
+    tech: ["PHP", "Google Apps Script", "Automation"],
+    highlights: ["Scheduled Triggers", "Personalized Emails", "API Integration"],
   }
 ];

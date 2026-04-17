@@ -30,7 +30,7 @@ export default function ContactClient() {
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-    
+
     // Name validation
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -66,70 +66,62 @@ export default function ContactClient() {
     }
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  setIsSubmitting(true);
+    setIsSubmitting(true);
 
-  // Track analytics event
-  gtag.event({
-    action: "form_submission",
-    category: "contact",
-    label: "Contact Form",
-  });
-
-  try {
-    const url = process.env.NEXT_PUBLIC_CONTACT_FORM_URL;
-    if (!url) {
-      throw new Error("Contact form URL is not configured");
-    }
-
-    const response = await fetch(url, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-      body: JSON.stringify({
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        message: formData.message.trim(),
-      }),
+    // Track analytics event
+    gtag.event({
+      action: "form_submission",
+      category: "contact",
+      label: "Contact Form",
     });
 
-    if (!response.ok) {
-      throw new Error(`Request failed with status ${response.status}`);
-    }
+    try {
+      const url = process.env.NEXT_PUBLIC_CONTACT_FORM_URL;
+      if (!url) {
+        throw new Error("Contact form URL is not configured");
+      }
 
-    const result = await response.json();
+      const response = await fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+        }),
+      });
 
-    if (result.result === "success") {
+      // Special handling for no-cors: we can't read the response, 
+      // but if the fetch didn't throw, we assume it was sent.
       setIsSuccess(true);
       setFormData({ name: "", email: "", message: "" });
-
       setTimeout(() => setIsSuccess(false), 5000);
-    } else {
-      throw new Error(result.error || "Submission failed");
+
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again later."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
-  } catch (error) {
-    console.error("Submission error:", error);
-    alert(
-      error instanceof Error
-        ? error.message
-        : "Something went wrong. Please try again later."
-    );
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
 
 
   return (
     <section className="px-6 py-20 max-w-4xl mx-auto">
       <h2 className="text-4xl font-bold mb-8">Get in Touch</h2>
-      
+
       <div className="grid md:grid-cols-2 gap-12">
         <div className="space-y-8">
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -137,7 +129,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           </p>
 
           <div className="space-y-6">
-            <button 
+            <button
               onClick={() => {
                 gtag.event({ action: "click", category: "contact", label: "Email Link" });
                 window.location.href = `mailto:${personalInfo.email}`;
@@ -153,7 +145,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               </div>
             </button>
 
-            <button 
+            <button
               onClick={() => {
                 gtag.event({ action: "click", category: "contact", label: "Phone Link" });
                 window.location.href = `tel:${personalInfo.phone}`;
@@ -169,7 +161,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               </div>
             </button>
 
-            <button 
+            <button
               onClick={() => {
                 gtag.event({ action: "click", category: "contact", label: "LinkedIn Link" });
                 window.open(`https://${personalInfo.linkedin}`, "_blank");
@@ -203,7 +195,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               <CheckCircle2 className="w-16 h-16 text-green-500 mb-4" />
               <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
               <p className="text-muted-foreground">Thank you for reaching out. I'll get back to you as soon as possible.</p>
-              <button 
+              <button
                 onClick={() => setIsSuccess(false)}
                 className="mt-6 text-primary font-semibold hover:underline"
               >
@@ -215,9 +207,9 @@ const handleSubmit = async (e: React.FormEvent) => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium">Name</label>
-              <input 
-                type="text" 
-                id="name" 
+              <input
+                type="text"
+                id="name"
                 value={formData.name}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 rounded-xl bg-background border ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-border focus:ring-primary'} focus:ring-2 outline-none transition-all`}
@@ -232,9 +224,9 @@ const handleSubmit = async (e: React.FormEvent) => {
 
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">Email</label>
-              <input 
-                type="email" 
-                id="email" 
+              <input
+                type="email"
+                id="email"
                 value={formData.email}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 rounded-xl bg-background border ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-border focus:ring-primary'} focus:ring-2 outline-none transition-all`}
@@ -249,8 +241,8 @@ const handleSubmit = async (e: React.FormEvent) => {
 
             <div className="space-y-2">
               <label htmlFor="message" className="text-sm font-medium">Message</label>
-              <textarea 
-                id="message" 
+              <textarea
+                id="message"
                 rows={4}
                 value={formData.message}
                 onChange={handleChange}
@@ -264,7 +256,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               )}
             </div>
 
-            <button 
+            <button
               type="submit"
               disabled={isSubmitting}
               className={`w-full py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}

@@ -26,7 +26,7 @@ export default function Hero() {
       category: "engagement",
       label: "Hero Resume",
     });
-    window.open("/Muthuvel_FullStackDeveloper.pdf", "_blank");
+    window.open("/Muthuvel_M.pdf", "_blank");
   };
 
   return (
@@ -48,19 +48,19 @@ export default function Hero() {
       </p>
 
       <div className="mt-10 flex flex-wrap gap-4">
-        <button 
+        <button
           onClick={() => handleNavigate("/projects", "Hero Projects")}
           className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-primary/20 cursor-pointer"
         >
           View My Work
         </button>
-        <button 
+        <button
           onClick={handleDownload}
           className="px-8 py-4 border-2 border-border rounded-full font-semibold transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer"
         >
           Download Resume
         </button>
-        <button 
+        <button
           onClick={() => handleNavigate("/contact", "Hero Contact")}
           className="px-8 py-4 text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 cursor-pointer"
         >

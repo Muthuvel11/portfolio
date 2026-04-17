@@ -1,12 +1,13 @@
 import { skills } from "@/data/skills";
-import { Code2, Database, Terminal, ShieldCheck, Wrench } from "lucide-react";
+import { Code2, Database, Terminal, ShieldCheck, Wrench, Cloud, Bot, Laptop } from "lucide-react";
 
 const iconMap: Record<string, any> = {
   frontend: Code2,
   backend: Terminal,
   database: Database,
-  testing: ShieldCheck,
-  tools: Wrench,
+  cloud: Cloud,
+  ai: Bot,
+  devTools: Laptop,
 };
 
 export default function SkillGrid() {
@@ -23,7 +24,7 @@ export default function SkillGrid() {
         {Object.entries(skills).map(([category, items]) => {
           const Icon = iconMap[category] || Code2;
           return (
-            <div 
+            <div
               key={category}
               className="p-8 rounded-3xl bg-accent/30 border border-border hover:border-primary/50 transition-colors group"
             >
@@ -33,10 +34,10 @@ export default function SkillGrid() {
                 </div>
                 <h3 className="text-xl font-bold capitalize">{category}</h3>
               </div>
-              
+
               <div className="flex flex-wrap gap-2">
                 {items.map((skill) => (
-                  <span 
+                  <span
                     key={skill}
                     className="px-3 py-1.5 text-sm bg-background border border-border rounded-xl font-medium"
                   >
